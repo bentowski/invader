@@ -1,43 +1,19 @@
 
-//=============poule1=============
-  var poule1 = document.getElementById('Poule1');
-  var p1 = poule1.getContext('2d');
-  p1.fillStyle = 'red';
-  p1.fillRect(30, 10, 100, 100);
-
-//=============poule2=============
-  var poule2 = document.getElementById('Poule2');
-  var p2 = poule2.getContext('2d');
-  p2.fillStyle = 'red';
-  p2.fillRect(30, 10, 100, 100);
-
-//=============poule3=============
-  var poule3 = document.getElementById('Poule3');
-  var p3 = poule3.getContext('2d');
-  p3.fillStyle = 'red';
-  p3.fillRect(30, 10, 100, 100);
-
-//=============poule4=============
-  var poule4 = document.getElementById('Poule4');
-  var p4 = poule4.getContext('2d');
-  p4.fillStyle = 'red';
-  p4.fillRect(30, 10, 100, 100);
-
-//=============poule5=============
-  var poule5 = document.getElementById('Poule5');
-  var p5 = poule5.getContext('2d');
-  p5.fillStyle = 'red';
-  p5.fillRect(30, 10, 100, 100);
-
   //==========taille fenetre==============
 
   var w=window.innerWidth
-  var position=w/2;
+  var h=window.innerHeight
+  console.log(h);
+  var position=w/2-5;
+  var wposition=w/2-1.5;
 
   function init(){
     var ini=document.querySelector(".ship")
     ini.style.left = position+"px";
-    console.log(w);
+    var wini=document.querySelector(".weapon")
+    wini.style.left = wposition+"px";
+    var vague=document.querySelector(".vague")
+    vague.style.width = w-120+"px"
   }
 
   init()
@@ -50,15 +26,21 @@
     case 37:
     if (position >60){
       position=position-50
+      wposition=wposition-50
       var pos=document.querySelector(".ship")
-      pos.style.left = position+"px";
+      pos.style.left = position+"px"
+      var wpos=document.querySelector(".weapon")
+      wpos.style.left = wposition+"px"
     }
       break;
     case 39:
-    if (position < w-60){
+    if (position < w-80){
       position=position+50
+      wposition=wposition+50
       var pos=document.querySelector(".ship")
-      pos.style.left = position+"px";
+      pos.style.left = position+"px"
+      var wpos=document.querySelector(".weapon")
+      wpos.style.left = wposition+"px"
       break;
     }
     case 32:
@@ -72,6 +54,25 @@
 
 //=========shoot============
 
+var weapon=document.querySelector(".weapon")
+
+    var vitesse=4
+
+var xBloc=50
+
 function shoot(){
+
+
+    console.log(vitesse);
+    xBloc = parseFloat(getComputedStyle(weapon).bottom);
+    weapon.style.bottom = (xBloc + vitesse) + "px";
+    console.log(xBloc);
+
+    if(xBloc < h){
+      requestAnimationFrame(shoot);
+    } else {
+      xBloc=50
+    }
+
 
 }
