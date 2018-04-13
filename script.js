@@ -24,7 +24,7 @@
     var compteur = Number(e.keyCode);
     switch (compteur){
     case 37:
-    if (position >60){
+    if (position >350){
       position=position-50
       wposition=wposition-50
       var pos=document.querySelector(".ship")
@@ -34,7 +34,7 @@
     }
       break;
     case 39:
-    if (position < w-80){
+    if (position < w-320){
       position=position+50
       wposition=wposition+50
       var pos=document.querySelector(".ship")
@@ -44,7 +44,7 @@
       break;
     }
     case 32:
-      shoot()
+      miss()
     break;
     }
 
@@ -53,26 +53,32 @@
   document.addEventListener("keydown", infosClavier)
 
 //=========shoot============
+var i=0
+var e=1
+var munition=[]
+var yBloc=50
+var vitesse=7
 
-var weapon=document.querySelector(".weapon")
+var mmissil ={
+  mwidth:3,
+  mheight:10,
+  mcolor:"yellow",
+  active:true
+}
 
-    var vitesse=4
 
-var xBloc=50
+function miss(){
+    munition[i]=Object.create(mmissil)
+    document.getElementById("weapon").innerHTML += '<div class="missil"></div>';
+
+    shoot()
+
+    i++
+    e=e*2
+    console.log(munition)
+}
 
 function shoot(){
-
-
-    console.log(vitesse);
-    xBloc = parseFloat(getComputedStyle(weapon).bottom);
-    weapon.style.bottom = (xBloc + vitesse) + "px";
-    console.log(xBloc);
-
-    if(xBloc < h){
-      requestAnimationFrame(shoot);
-    } else {
-      xBloc=50
-    }
-
-
+  var color=document.querySelector(".missil")
+  color.style.backgroundColor = mmissil.mcolor
 }
