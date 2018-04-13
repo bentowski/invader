@@ -1,84 +1,72 @@
-
-  //==========taille fenetre==============
-
-  var w=window.innerWidth
-  var h=window.innerHeight
-  console.log(h);
-  var position=w/2-5;
-  var wposition=w/2-1.5;
-
-  function init(){
-    var ini=document.querySelector(".ship")
-    ini.style.left = position+"px";
-    var wini=document.querySelector(".weapon")
-    wini.style.left = wposition+"px";
-    var vague=document.querySelector(".vague")
-    vague.style.width = w-120+"px"
-  }
-
-  init()
-
-//=========Mvmt sheep=============
-
-  function infosClavier(e) {
-    var compteur = Number(e.keyCode);
-    switch (compteur){
-    case 37:
-    if (position >350){
-      position=position-50
-      wposition=wposition-50
-      var pos=document.querySelector(".ship")
-      pos.style.left = position+"px"
-      var wpos=document.querySelector(".weapon")
-      wpos.style.left = wposition+"px"
-    }
-      break;
-    case 39:
-    if (position < w-320){
-      position=position+50
-      wposition=wposition+50
-      var pos=document.querySelector(".ship")
-      pos.style.left = position+"px"
-      var wpos=document.querySelector(".weapon")
-      wpos.style.left = wposition+"px"
-      break;
-    }
+//==============interaction==============
+function infosClavier(e) {
+    var number = Number(e.keyCode);
+    console.log(number);
+  switch (number){
     case 32:
-      miss()
     break;
-    }
+    case 37:
+    droite()
+    break;
+    case 39:
+    break;
+    case 13:
+    init()
+    break;
+  }
+}
 
+ document.addEventListener("keydown", infosClavier)
+
+
+
+
+//===============initialisation===========
+
+l=window.innerWidth
+h=window.innerHeight
+const vague=document.getElementById("vagues");
+const ctx = vague.getContext('2d') ;
+const ship=document.getElementById("ship")
+const shipCtx=ship.getContext("2d")
+var long=0
+var xs=l/2-85/2
+var ys=10
+var rang=0
+var ye=25
+var xe=""
+function init(){
+  while(long < 85){
+        shipCtx.fillStyle="green"
+        shipCtx.fillRect(xs, ys, 1, 50)
+        xs=xs+1
+    long++
+    console.log(long)
   }
 
-  document.addEventListener("keydown", infosClavier)
-
-//=========shoot============
-var i=0
-var e=1
-var munition=[]
-var yBloc=50
-var vitesse=7
-
-var mmissil ={
-  mwidth:3,
-  mheight:10,
-  mcolor:"yellow",
-  active:true
+  while(rang < 5){
+    xe=150
+    for(i=0; i<10; i++){
+        ctx.fillStyle="red"
+        ctx.fillRect(xe, ye, 85, 50)
+        xe=xe+170
+    }
+    ye=ye+90
+    rang++
+    console.log(rang)
+  }
 }
 
 
-function miss(){
-    munition[i]=Object.create(mmissil)
-    document.getElementById("weapon").innerHTML += '<div class="missil"></div>';
+//===============ship=====================
 
-    shoot()
-
-    i++
-    e=e*2
-    console.log(munition)
-}
-
-function shoot(){
-  var color=document.querySelector(".missil")
-  color.style.backgroundColor = mmissil.mcolor
+function droite(){
+  xs+=1
+  while(long < 85){
+        shipCtx.fillStyle="green"
+        shipCtx.fillRect(xs, ys, 1, 50)
+        xs=xs+1
+    long++
+    console.log(long)
+  }
 }
