@@ -4,11 +4,13 @@ function infosClavier(e) {
     console.log(number);
   switch (number){
     case 32:
+
     break;
     case 37:
-    droite()
+    gauche()
     break;
     case 39:
+    droite()
     break;
     case 13:
     init()
@@ -57,16 +59,51 @@ function init(){
   }
 }
 
+var Droite=0
+var Gauche=0
+var vitesse=30
+var vert=vitesse+1
+var noir=vitesse+2
+
 
 //===============ship=====================
 
 function droite(){
-  xs+=1
-  while(long < 85){
+  if(xs < l-100){
+        if (Gauche===1){
+          shipCtx.fillStyle="green"
+          shipCtx.fillRect(xs-9, ys, vert, 50)
+          var left=xs-89
+          shipCtx.fillStyle="black"
+          shipCtx.fillRect(left,ys,noir,50)
+        }
+        Gauche=0
         shipCtx.fillStyle="green"
-        shipCtx.fillRect(xs, ys, 1, 50)
-        xs=xs+1
-    long++
-    console.log(long)
-  }
+        shipCtx.fillRect(xs, ys, vert, 50)
+        var left=xs-86
+        shipCtx.fillStyle="black"
+        shipCtx.fillRect(left,ys,noir,50)
+        xs+=vitesse
+        Droite=1
+    }
+}
+
+function gauche(){
+  if (xs > (100+85)){
+        if (Droite===1){
+          shipCtx.fillStyle="green"
+          shipCtx.fillRect(xs-86, ys, vert, 50)
+          var right=xs-9
+          shipCtx.fillStyle="black"
+          shipCtx.fillRect(right,ys,noir,50)
+        }
+        Droite=0
+        shipCtx.fillStyle="green"
+        shipCtx.fillRect(xs-95, ys, vert, 50)
+        var right=xs-10
+        shipCtx.fillStyle="black"
+        shipCtx.fillRect(right,ys,noir,50)
+        xs-=vitesse
+        Gauche=1
+    }
 }
