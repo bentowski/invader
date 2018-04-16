@@ -1,16 +1,15 @@
 //==============interaction==============
 function infosClavier(e) {
     var number = Number(e.keyCode);
-    console.log(number);
   switch (number){
     case 32:
-
+    mvmt()
     break;
     case 37:
-    gauche()
+    mvmtG()
     break;
     case 39:
-    droite()
+    mvmtD()
     break;
     case 13:
     init()
@@ -27,23 +26,34 @@ function infosClavier(e) {
 
 l=window.innerWidth
 h=window.innerHeight
-const vague=document.getElementById("vagues");
-const ctx = vague.getContext('2d') ;
+const vague=document.getElementById("vagues")
+const ctx = vague.getContext('2d')
 const ship=document.getElementById("ship")
 const shipCtx=ship.getContext("2d")
 var long=0
-var xs=l/2-85/2
-var ys=10
-var rang=0
-var ye=25
-var xe=""
+  , xs=l/2-85/2
+  , ys=10
+  , rang=0
+  , ye=25
+  , xe=""
+  , Droite=0
+  , Gauche=0
+  , vitesse=30 // vitesse vaisseau
+  , vert=vitesse+1
+  , noir=vitesse+2
+  , xa=150+85
+  , xb=150
+  , vitessev=10 //vitesse vague
+  , rouge=vitessev+1
+  , Noir=vitessev+2
+  , mvmtv=0
+
 function init(){
   while(long < 85){
         shipCtx.fillStyle="green"
         shipCtx.fillRect(xs, ys, 1, 50)
         xs=xs+1
     long++
-    console.log(long)
   }
 
   while(rang < 5){
@@ -55,15 +65,79 @@ function init(){
     }
     ye=ye+90
     rang++
-    console.log(rang)
   }
+  ye=25
 }
 
-var Droite=0
-var Gauche=0
-var vitesse=30
-var vert=vitesse+1
-var noir=vitesse+2
+
+
+//==============Mvmt vague================
+
+function mvmtD(){
+  if(mvmtv===1){
+    xa+=95
+    xb+=95
+  }
+    xa+=vitessev
+    xb+=vitessev
+    rang=0
+    while(rang < 5){
+      var xf=xa
+      var xr=xb
+      for(i=0; i<10; i++){
+          ctx.fillStyle="red"
+          ctx.fillRect(xf-10, ye, rouge, 50)
+          xf=xf+170
+          console.log(xf);
+          ctx.fillStyle="black"
+          ctx.fillRect(xr-10, ye, Noir, 50)
+          xr=xr+170
+      }
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=0
+}
+
+function mvmtG(){
+  if (mvmtv===0){
+    xa-=95
+    xb-=95
+  }
+    xa-=vitessev
+    xb-=vitessev
+    rang=0
+    while(rang < 5){
+      var xf=xa
+      var xr=xb
+      for(i=0; i<10; i++){
+          ctx.fillStyle="red"
+          ctx.fillRect(xf+10, ye, rouge, 50)
+          xf=xf+170
+          console.log(xf);
+          ctx.fillStyle="black"
+          ctx.fillRect(xr+10, ye, Noir, 50)
+          xr=xr+170
+      }
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=1
+}
+/*function mvmt(){
+  while(xa<2000){
+    xa+=vitessev
+    xb+=vitessev
+    mvmtD()
+  }
+  while(xa>100){
+    xa-=vitessev
+    xb-=vitessev
+    mvmtG()
+  }
+}*/
 
 
 //===============ship=====================
@@ -107,3 +181,12 @@ function gauche(){
         Gauche=1
     }
 }
+
+/*function tir(){
+  ys=60
+  while (ys<h){
+    shipCtx.fillStyle="yellow"
+    shipCtx.fillRect(xs-85/2, ys, 5, 20)
+    ys+=1
+  }
+}*/
