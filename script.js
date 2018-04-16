@@ -113,7 +113,7 @@ function mvmtG(){
       var xr=xb
       for(i=0; i<10; i++){
           ctx.fillStyle="red"
-          ctx.fillRect(xf+10, ye, rouge, 50)
+          ctx.fillRect(xf+11, ye, rouge, 50)
           xf=xf+170
           console.log(xf);
           ctx.fillStyle="black"
@@ -126,19 +126,6 @@ function mvmtG(){
     ye=25
     mvmtv=1
 }
-/*function mvmt(){
-  while(xa<2000){
-    xa+=vitessev
-    xb+=vitessev
-    mvmtD()
-  }
-  while(xa>100){
-    xa-=vitessev
-    xb-=vitessev
-    mvmtG()
-  }
-}*/
-
 
 //===============ship=====================
 
