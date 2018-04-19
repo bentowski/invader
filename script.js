@@ -131,7 +131,7 @@ function move(){
         xr=xblack
         for(i=0; i<10; i++){
           ctx.fillStyle="red"
-          ctx.fillRect(xf+11, ye, rouge, 50)
+          ctx.fillRect(xf+10, ye, rouge, 50)
           xf=xf+170
           ctx.fillStyle="black"
           ctx.fillRect(xr+10, ye, Noir, 50)
@@ -140,12 +140,34 @@ function move(){
         ye=ye+90
         rang++
       }
+<<<<<<< HEAD
       ye=25
       mvmtv=1
       if(xr <= 1900){
         deplacementDroite=true
       }
   }
+=======
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=1
+}
+/*function mvmt(){
+  while(xa<2000){
+    xa+=vitessev
+    xb+=vitessev
+    mvmtD()
+  }
+  while(xa>100){
+    xa-=vitessev
+    xb-=vitessev
+    mvmtG()
+  }
+}*/
+
+>>>>>>> parent of 51ec546... suppression trait
 
 //===============ship=====================
 
