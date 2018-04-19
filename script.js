@@ -3,13 +3,13 @@ function infosClavier(e) {
     var number = Number(e.keyCode);
   switch (number){
     case 32:
-    deplacement()
+    mvmt()
     break;
     case 37:
-    gauche()
+    mvmtG()
     break;
     case 39:
-    droite()
+    mvmtD()
     break;
     case 13:
     init()
@@ -41,14 +41,11 @@ var long=0
   , vitesse=30 // vitesse vaisseau
   , vert=vitesse+1
   , noir=vitesse+2
-  , xred=150+85
-  , xblack=150
-  , xf=""
-  , xr=""
+  , xa=150+85
+  , xb=150
   , vitessev=10 //vitesse vague
   , rouge=vitessev+1
   , Noir=vitessev+2
-  , deplacementDroite=true
   , mvmtv=0
 
 function init(){
@@ -70,72 +67,59 @@ function init(){
     rang++
   }
   ye=25
-  setInterval(move,500)
 }
 
 
 
 //==============Mvmt vague================
 
-function move(){
-  console.log(deplacementDroite);
-  if (deplacementDroite){
-    mvmtD()
-  } else {
-    mvmtG()
+function mvmtD(){
+  if(mvmtv===1){
+    xa+=95
+    xb+=95
   }
+    xa+=vitessev
+    xb+=vitessev
+    rang=0
+    while(rang < 5){
+      var xf=xa
+      var xr=xb
+      for(i=0; i<10; i++){
+          ctx.fillStyle="red"
+          ctx.fillRect(xf-10, ye, rouge, 50)
+          xf=xf+170
+          console.log(xf);
+          ctx.fillStyle="black"
+          ctx.fillRect(xr-10, ye, Noir, 50)
+          xr=xr+170
+      }
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=0
 }
 
-
-
-  function mvmtD(){
-    if(mvmtv===1){
-      xred+=95
-      xblack-=75
-    }
-      xred+=vitessev
-      xblack+=vitessev
-      rang=0
-      while(rang < 5){
-        xf=xred
-        xr=xblack
-        for(i=0; i<10; i++){
-            ctx.fillStyle="red"
-            ctx.fillRect(xf-10, ye, rouge, 50)
-            xf=xf+170
-            ctx.fillStyle="black"
-            ctx.fillRect(xr-10, ye, Noir, 50)
-            xr=xr+170
-        }
-        ye=ye+90
-        rang++
-      }
-      ye=25
-      mvmtv=0
-      if(xf >= vagues.width){
-        deplacementDroite=false
-      }
+function mvmtG(){
+  if (mvmtv===0){
+    xa-=95
+    xb-=95
   }
-
-
-  function mvmtG(){
-    if (mvmtv===0){
-      xred-=95
-      xblack+=75
-    }
-      xred-=vitessev
-      xblack-=vitessev
-      rang=0
-      while(rang < 5){
-        xf=xred
-        xr=xblack
-        for(i=0; i<10; i++){
+    xa-=vitessev
+    xb-=vitessev
+    rang=0
+    while(rang < 5){
+      var xf=xa
+      var xr=xb
+      for(i=0; i<10; i++){
           ctx.fillStyle="red"
           ctx.fillRect(xf+10, ye, rouge, 50)
           xf=xf+170
+          console.log(xf);
           ctx.fillStyle="black"
           ctx.fillRect(xr+10, ye, Noir, 50)
           xr=xr+170
+<<<<<<< HEAD
         }
         ye=ye+90
         rang++
@@ -145,8 +129,22 @@ function move(){
       mvmtv=1
       if(xr <= 1900){
         deplacementDroite=true
+=======
+>>>>>>> parent of a2cf15a... déplacement vague auto
       }
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=1
+}
+/*function mvmt(){
+  while(xa<2000){
+    xa+=vitessev
+    xb+=vitessev
+    mvmtD()
   }
+<<<<<<< HEAD
 =======
       ye=ye+90
       rang++
@@ -160,6 +158,8 @@ function move(){
     xb+=vitessev
     mvmtD()
   }
+=======
+>>>>>>> parent of a2cf15a... déplacement vague auto
   while(xa>100){
     xa-=vitessev
     xb-=vitessev
@@ -167,7 +167,10 @@ function move(){
   }
 }*/
 
+<<<<<<< HEAD
 >>>>>>> parent of 51ec546... suppression trait
+=======
+>>>>>>> parent of a2cf15a... déplacement vague auto
 
 //===============ship=====================
 
