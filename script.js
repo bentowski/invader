@@ -6,10 +6,10 @@ function infosClavier(e) {
     mvmt()
     break;
     case 37:
-    mvmtG()
+    gauche()
     break;
     case 39:
-    mvmtD()
+    droite()
     break;
     case 13:
     init()
