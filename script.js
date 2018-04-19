@@ -140,13 +140,24 @@ function move(){
         ye=ye+90
         rang++
       }
-      ye=25
-      mvmtv=1
-      if(xr <= 1900){
-        deplacementDroite=true
-      }
+      ye=ye+90
+      rang++
+    }
+    ye=25
+    mvmtv=1
+}
+/*function mvmt(){
+  while(xa<2000){
+    xa+=vitessev
+    xb+=vitessev
+    mvmtD()
   }
-
+  while(xa>100){
+    xa-=vitessev
+    xb-=vitessev
+    mvmtG()
+  }
+}*/
 
 
 //===============ship=====================
