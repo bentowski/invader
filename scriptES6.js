@@ -7,10 +7,10 @@ var infosClavier = e => {
       shoot();
       break;
     case 37:
-      mvmtL();
+      left();
       break;
     case 39:
-      mvmtR();
+    right();
       break;
     case 13:
       init();
@@ -48,7 +48,7 @@ let widthElements=0
   , previousWaveMove=""
   , shootSpeed=5
   , waveSpeed=20
-  , red=waveSpeed+1
+  , red=waveSpeed+2
   , Black=waveSpeed+2
   , xRed=xWave+finalWidthElements
   , xBlack=xWave
@@ -74,7 +74,7 @@ var init = () => {
     y+=spaceWaveElementsHeight
     row++
   }
- //setInterval(move,500)
+ setInterval(move,500)
 }
 
 //===========Wave Move===================
@@ -84,7 +84,9 @@ var move = ()=>{waveMoveRight ? mvmtR() : mvmtL()}
 var mvmtR = ()=>{
   let y=yWave
   let row=rowWave
-  !previousWaveMove ? (xRed+=widthElements+waveSpeed, xBlack-=widthElements+waveSpeed) : false
+  console.log("width"+finalWidthElements);
+  console.log("previous=================="+previousWaveMove);
+  previousWaveMove ? (xRed+=finalWidthElements-columnWidth-waveSpeed, xBlack-=finalWidthElements+waveSpeed) : false
   xRed+=waveSpeed
   xBlack+=waveSpeed
 
@@ -95,22 +97,25 @@ var mvmtR = ()=>{
       ctx.fillStyle="red"
       ctx.fillRect(xa-waveSpeed, y, red, heightElements)
       xa+=spaceWaveElements
+      console.log("xar"+i+xa);
       ctx.fillStyle="black"
       ctx.fillRect(xb-waveSpeed, y, Black, heightElements)
       xb+=spaceWaveElements
+      console.log("xbr"+i+xb)
     }
     y+=spaceWaveElementsHeight
     row++
-    previousWaveMove=false;
+
     (xa>=vagues.width) ? waveMoveRight=false : waveMoveRight=true
   }
-
+previousWaveMove=false;
+console.log(previousWaveMove);
 }
 
 var mvmtL = ()=>{
   let y=yWave;
   let row=rowWave;
-  !previousWaveMove ? (xRed-=widthElements-waveSpeed-columnWidth, xBlack+=widthElements+waveSpeed) : false;
+  !previousWaveMove ? (xRed-=finalWidthElements-waveSpeed-columnWidth, xBlack+=finalWidthElements+waveSpeed) : false;
   xRed-=waveSpeed;
   xBlack-=waveSpeed;
   while(row<finalRowWave){
@@ -120,60 +125,61 @@ var mvmtL = ()=>{
       ctx.fillStyle="red";
       ctx.fillRect(xa-waveSpeed, y, red, heightElements);
       xa+=spaceWaveElements;
+      console.log("xal"+i+xa)
       ctx.fillStyle="black";
       ctx.fillRect(xb-waveSpeed, y, Black, heightElements);
       xb+=spaceWaveElements;
-      console.log(xb);
+      console.log("xbl"+i+xb)
     }
     y+=spaceWaveElementsHeight;
     row++;
-    console.log(y);
     (xb<=1900) ? waveMoveRight=true : waveMoveRight=false;
   }
-  previousMove=true;
+  previousWaveMove=true;
+  console.log(previousWaveMove);
 }
 
 //==================ship=====================
-// var right = ()=>{
-//   (xShip<l-100) ? ((previousMove==="left") ? hardRightMove() : false, rightMove()) : false
-// }
-//
-// var left = ()=>{
-//   (xShip>(100+finalWidthElements)) ? ((previousMove==="right") ? hardLeftMove() : false, leftMove()) : false
-// }
-//
-// var rightMove = ()=>{
-//   shipCtx.fillStyle="green"
-//   shipCtx.fillRect(xShip, yShip, green, heightElements)
-//   let move=xShip-86
-//   shipCtx.fillStyle="black"
-//   shipCtx.fillRect(move,yShip,black,heightElements)
-//   xShip+=shipSpeed
-//   previousMove="right"
-// }
-//
-// var hardRightMove = ()=>{
-//   shipCtx.fillStyle="green"
-//   shipCtx.fillRect(xShip-9, yShip, green, heightElements)
-//   let move=xShip-89
-//   shipCtx.fillStyle="black"
-//   shipCtx.fillRect(move,yShip,black,heightElements)
-// }
-//
-// var leftMove = ()=>{
-//   shipCtx.fillStyle="green"
-//   shipCtx.fillRect(xShip-95, yShip, green, heightElements)
-//   let move=xShip-10
-//   shipCtx.fillStyle="black"
-//   shipCtx.fillRect(move,yShip,black,heightElements)
-//   xShip-=shipSpeed
-//   previousMove="left"
-// }
-//
-// var hardLeftMove = ()=>{
-//   shipCtx.fillStyle="green"
-//   shipCtx.fillRect(xShip-86, yShip, green, heightElements)
-//   let move=xShip-9
-//   shipCtx.fillStyle="black"
-//   shipCtx.fillRect(move,yShip,black,heightElements)
-// }
+var right = ()=>{
+  (xShip<l-100) ? ((previousMove==="left") ? hardRightMove() : false, rightMove()) : false
+}
+
+var left = ()=>{
+  (xShip>(100+finalWidthElements)) ? ((previousMove==="right") ? hardLeftMove() : false, leftMove()) : false
+}
+
+var rightMove = ()=>{
+  shipCtx.fillStyle="green"
+  shipCtx.fillRect(xShip, yShip, green, heightElements)
+  let move=xShip-86
+  shipCtx.fillStyle="black"
+  shipCtx.fillRect(move,yShip,black,heightElements)
+  xShip+=shipSpeed
+  previousMove="right"
+}
+
+var hardRightMove = ()=>{
+  shipCtx.fillStyle="green"
+  shipCtx.fillRect(xShip-9, yShip, green, heightElements)
+  let move=xShip-89
+  shipCtx.fillStyle="black"
+  shipCtx.fillRect(move,yShip,black,heightElements)
+}
+
+var leftMove = ()=>{
+  shipCtx.fillStyle="green"
+  shipCtx.fillRect(xShip-95, yShip, green, heightElements)
+  let move=xShip-10
+  shipCtx.fillStyle="black"
+  shipCtx.fillRect(move,yShip,black,heightElements)
+  xShip-=shipSpeed
+  previousMove="left"
+}
+
+var hardLeftMove = ()=>{
+  shipCtx.fillStyle="green"
+  shipCtx.fillRect(xShip-86, yShip, green, heightElements)
+  let move=xShip-9
+  shipCtx.fillStyle="black"
+  shipCtx.fillRect(move,yShip,black,heightElements)
+}
