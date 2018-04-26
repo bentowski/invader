@@ -64,17 +64,17 @@ var init = () => {
     xShip++
     widthElements++
   }
-  while (row < finalRowWave) {
-    let x=xWave
-    for (i=0; i<waveElements; i++){
-      ctx.fillStyle="red"
-      ctx.fillRect(x, y, finalWidthElements, heightElements)
-      x+=spaceWaveElements
-    }
-    y+=spaceWaveElementsHeight
-    row++
-  }
- setInterval(move,500)
+ //  while (row < finalRowWave) {
+ //    let x=xWave
+ //    for (i=0; i<waveElements; i++){
+ //      ctx.fillStyle="red"
+ //      ctx.fillRect(x, y, finalWidthElements, heightElements)
+ //      x+=spaceWaveElements
+ //    }
+ //    y+=spaceWaveElementsHeight
+ //    row++
+ //  }
+ // setInterval(move,500)
 }
 
 //===========Wave Move===================
