@@ -64,17 +64,17 @@ var init = () => {
     xShip++
     widthElements++
   }
- //  while (row < finalRowWave) {
- //    let x=xWave
- //    for (i=0; i<waveElements; i++){
- //      ctx.fillStyle="red"
- //      ctx.fillRect(x, y, finalWidthElements, heightElements)
- //      x+=spaceWaveElements
- //    }
- //    y+=spaceWaveElementsHeight
- //    row++
- //  }
- // setInterval(move,500)
+  while (row < finalRowWave) {
+    let x=xWave
+    for (i=0; i<waveElements; i++){
+      ctx.fillStyle="red"
+      ctx.fillRect(x, y, finalWidthElements, heightElements)
+      x+=spaceWaveElements
+    }
+    y+=spaceWaveElementsHeight
+    row++
+  }
+ setInterval(move,500)
 }
 
 //===========Wave Move===================
@@ -84,8 +84,6 @@ var move = ()=>{waveMoveRight ? mvmtR() : mvmtL()}
 var mvmtR = ()=>{
   let y=yWave
   let row=rowWave
-  console.log("width"+finalWidthElements);
-  console.log("previous=================="+previousWaveMove);
   previousWaveMove ? (xRed+=finalWidthElements-columnWidth-waveSpeed, xBlack-=finalWidthElements+waveSpeed) : false
   xRed+=waveSpeed
   xBlack+=waveSpeed
@@ -97,11 +95,9 @@ var mvmtR = ()=>{
       ctx.fillStyle="red"
       ctx.fillRect(xa-waveSpeed, y, red, heightElements)
       xa+=spaceWaveElements
-      console.log("xar"+i+xa);
       ctx.fillStyle="black"
       ctx.fillRect(xb-waveSpeed, y, Black, heightElements)
       xb+=spaceWaveElements
-      console.log("xbr"+i+xb)
     }
     y+=spaceWaveElementsHeight
     row++
@@ -109,7 +105,6 @@ var mvmtR = ()=>{
     (xa>=vagues.width) ? waveMoveRight=false : waveMoveRight=true
   }
 previousWaveMove=false;
-console.log(previousWaveMove);
 }
 
 var mvmtL = ()=>{
@@ -125,18 +120,15 @@ var mvmtL = ()=>{
       ctx.fillStyle="red";
       ctx.fillRect(xa-waveSpeed, y, red, heightElements);
       xa+=spaceWaveElements;
-      console.log("xal"+i+xa)
       ctx.fillStyle="black";
       ctx.fillRect(xb-waveSpeed, y, Black, heightElements);
       xb+=spaceWaveElements;
-      console.log("xbl"+i+xb)
     }
     y+=spaceWaveElementsHeight;
     row++;
     (xb<=1900) ? waveMoveRight=true : waveMoveRight=false;
   }
   previousWaveMove=true;
-  console.log(previousWaveMove);
 }
 
 //==================ship=====================
@@ -182,4 +174,20 @@ var hardLeftMove = ()=>{
   let move=xShip-9
   shipCtx.fillStyle="black"
   shipCtx.fillRect(move,yShip,black,heightElements)
+}
+
+//=============weapon==================
+// const weapon={
+//   var xWeapon=xShip,
+//   shipCtx.fillStyle="yellow",
+//   shipCtx.fillRect(xWeapon,yShip-heightElements, 5, 10)
+// }
+//
+// var shoot = ()=>{
+//   let weapon= new Object(weapon)
+// }
+
+var shoot = () => {
+  ctx.clearRect(800,300,finalWidthElements,heightElements)
+  console.log("test");
 }
