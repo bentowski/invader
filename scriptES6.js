@@ -92,6 +92,7 @@ var move = ()=>{waveMoveRight ? mvmtR() : mvmtL()}
 var mvmtR = ()=>{
   xWave+=waveSpeed
   let y=yWave
+<<<<<<< HEAD
   let x=xWave
   for(i=0;i<enemiNumber.length;i++){
     if(i===10 || i===20 || i===30 || i===40){
@@ -107,8 +108,26 @@ var mvmtR = ()=>{
     }
     if(xWave>=300){
       waveMoveRight=false
+=======
+  let row=rowWave
+  previousWaveMove ? (xRed+=finalWidthElements-columnWidth-waveSpeed, xBlack-=finalWidthElements+waveSpeed) : false
+  xRed+=waveSpeed
+  xBlack+=waveSpeed
+
+  while (row<finalRowWave){
+    let xa=xRed
+    let xb=xBlack
+    for(i=0; i<waveElements; i++){
+      ctx.fillStyle="red"
+      ctx.fillRect(xa-waveSpeed, y, red, heightElements)
+      xa+=spaceWaveElements
+      ctx.fillStyle="black"
+      ctx.fillRect(xb-waveSpeed, y, Black, heightElements)
+      xb+=spaceWaveElements
+>>>>>>> testscanvas
     }
   }
+<<<<<<< HEAD
 
 
 
@@ -132,6 +151,34 @@ var mvmtR = ()=>{
         waveMoveRight=true
       }
     }
+=======
+previousWaveMove=false;
+}
+
+var mvmtL = ()=>{
+  let y=yWave;
+  let row=rowWave;
+  !previousWaveMove ? (xRed-=finalWidthElements-waveSpeed-columnWidth, xBlack+=finalWidthElements+waveSpeed) : false;
+  xRed-=waveSpeed;
+  xBlack-=waveSpeed;
+  while(row<finalRowWave){
+    let xa=xRed;
+    let xb=xBlack;
+    for(i=0; i<waveElements; i++){
+      ctx.fillStyle="red";
+      ctx.fillRect(xa-waveSpeed, y, red, heightElements);
+      xa+=spaceWaveElements;
+      ctx.fillStyle="black";
+      ctx.fillRect(xb-waveSpeed, y, Black, heightElements);
+      xb+=spaceWaveElements;
+    }
+    y+=spaceWaveElementsHeight;
+    row++;
+    (xb<=1900) ? waveMoveRight=true : waveMoveRight=false;
+  }
+  previousWaveMove=true;
+}
+>>>>>>> testscanvas
 
 //==================ship=====================
 var right = ()=>{
@@ -189,6 +236,7 @@ var shoot=()=>{
   console.log("test1");
 }
 
+<<<<<<< HEAD
 var moveWeapon = ()=>{
   console.log("test");
   ctx.clearRect(xWeapon,yWeapon,weaponWidth+1,weaponHeight)
@@ -199,3 +247,20 @@ var moveWeapon = ()=>{
 }
 
 var shOot = ()=> new shoot()
+=======
+//=============weapon==================
+// const weapon={
+//   var xWeapon=xShip,
+//   shipCtx.fillStyle="yellow",
+//   shipCtx.fillRect(xWeapon,yShip-heightElements, 5, 10)
+// }
+//
+// var shoot = ()=>{
+//   let weapon= new Object(weapon)
+// }
+
+var shoot = () => {
+  ctx.clearRect(800,300,finalWidthElements,heightElements)
+  console.log("test");
+}
+>>>>>>> testscanvas
