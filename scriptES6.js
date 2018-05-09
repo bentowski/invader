@@ -10,7 +10,7 @@ var infosClavier = e => {
       left();
       break;
     case 39:
-    right();
+      right();
       break;
     case 13:
       init();
@@ -18,7 +18,22 @@ var infosClavier = e => {
   }
 }
 
+var infosClavier2 = a => {
+  let number = Number(a.keyCode);
+  console.log(number);
+  switch (number) {
+    case 37:
+    stop()
+      break;
+    case 39:
+    stop()
+      break;
+  }
+}
+
+
 document.addEventListener("keydown", infosClavier);
+document.addEventListener("keyup", infosClavier2);
 
 //===============variables=============
 l=window.innerWidth
@@ -39,7 +54,7 @@ let widthElements=0
   , xWave=150
   , yWave=25
   , previousMove=""
-  , shipSpeed=30
+  , shipSpeed=1
   , green=shipSpeed+1
   , black=shipSpeed+2
   , waveMoveRight=true
@@ -56,18 +71,18 @@ let widthElements=0
   , weaponWidth=5
   , yWeapon=vagues.height-weaponHeight
   , xWeapon
+  , moveShip=0
+  , previous=true
+  , leftShip
+  , rightShip
 
 //=============initialisation===========
 
 var init = () => {
   let row=rowWave
   let y=yWave
-  while (widthElements<finalWidthElements) {
     ctx.fillStyle="green"
-    ctx.fillRect(xShip, yShip, columnWidth, heightElements)
-    xShip++
-    widthElements++
-  }
+    ctx.fillRect(xShip, yShip, finalWidthElements, heightElements)
   while (row < finalRowWave) {
     let x=xWave
     for (i=0; i<waveElements; i++){
@@ -133,49 +148,44 @@ var mvmtR = ()=>{
 
 
 //==================ship=====================
+
+var stop= ()=>{
+  clearInterval(leftShip)
+  clearInterval(rightShip)
+}
+
 var right = ()=>{
-  (xShip<l-100) ? ((previousMove==="left") ? hardRightMove() : false, rightMove()) : false
+  clearInterval(leftShip)
+  rightShip=setInterval(rightMove,10)
 }
 
 var left = ()=>{
-  (xShip>(100+finalWidthElements)) ? ((previousMove==="right") ? hardLeftMove() : false, leftMove()) : false
+  clearInterval(rightShip)
+  leftShip=setInterval(leftMove,10)
 }
 
 var rightMove = ()=>{
+  ctx.clearRect(xShip, yShip, finalWidthElements+1, heightElements)
+  // if(!previous){
+    xShip+=shipSpeed
+  // }
   ctx.fillStyle="green"
-  ctx.fillRect(xShip, yShip, green, heightElements)
-  let move=xShip-86
-  ctx.fillStyle="black"
-  ctx.fillRect(move,yShip,black,heightElements)
-  xShip+=shipSpeed
-  previousMove="right"
-}
-
-var hardRightMove = ()=>{
-  ctx.fillStyle="green"
-  ctx.fillRect(xShip-9, yShip, green, heightElements)
-  let move=xShip-89
-  ctx.fillStyle="black"
-  ctx.fillRect(move,yShip,black,heightElements)
+  ctx.fillRect(xShip, yShip, finalWidthElements, heightElements)
+  // previous=true
+  console.log(shipSpeed);
+  console.log(xShip);
 }
 
 var leftMove = ()=>{
+  ctx.clearRect(xShip, yShip, finalWidthElements+1, heightElements)
+  // if(previous){
+    xShip-=shipSpeed
+  // }
   ctx.fillStyle="green"
-  ctx.fillRect(xShip-95, yShip, green, heightElements)
-  let move=xShip-10
-  ctx.fillStyle="black"
-  ctx.fillRect(move,yShip,black,heightElements)
-  xShip-=shipSpeed
-  previousMove="left"
+  ctx.fillRect(xShip, yShip, finalWidthElements, heightElements)
+  // previous=false
 }
 
-var hardLeftMove = ()=>{
-  ctx.fillStyle="green"
-  ctx.fillRect(xShip-86, yShip, green, heightElements)
-  let move=xShip-9
-  ctx.fillStyle="black"
-  ctx.fillRect(move,yShip,black,heightElements)
-}
 
 //============shoot================
 
@@ -185,12 +195,10 @@ var shoot=()=>{
   ctx.fillStyle="yellow"
   ctx.fillRect(xWeapon, yWeapon , weaponWidth, weaponHeight)
   setInterval(moveWeapon,500)
-  console.log("test1");
 }
 
 
 var moveWeapon = ()=>{
-  console.log("test");
   ctx.clearRect(xWeapon,yWeapon,weaponWidth+1,weaponHeight)
   yWeapon-=shootSpeed
   ctx.fillStyle="yellow"
