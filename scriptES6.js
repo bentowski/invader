@@ -9,6 +9,12 @@ var infosClavier = e => {
        firstInit=false
      }
       break;
+    case 37:
+      left()
+      break;
+    case 39:
+      right()
+      break;
   }
 }
 
@@ -19,17 +25,11 @@ var infosClavier2 = e => {
     case 32:
       shoot()
       break;
-    case 37:
-      leftMove()
-      break;
-    case 39:
-      rightMove()
-      break;
   }
 }
 
 document.addEventListener("keydown", infosClavier);
-document.addEventListener("keyup", infosClavier2)
+document.addEventListener("keyup", infosClavier2) //only for shooting
 
                   //===============VARIABLES=============
             //=====window dimensions=====
@@ -58,7 +58,7 @@ let finalWidthElements=85
             //===ship===
   , xShip=l/2-finalWidthElements/2 //pos x Ship
   , yShip=800 //pos y Ship
-  , shipSpeed=20 //moving Ship
+  , shipSpeed=1 //moving Ship
             //===weapon===
   , weaponHeight=30 //hight of missils
   , weaponWidth=5 //width of missils
@@ -136,13 +136,22 @@ var mvmtR = ()=>{
 
                 //==================SHIP=====================
 
+var right = ()=>{
+  let myInterval = setInterval(rightMove,5)
+  setTimeout(()=>clearInterval(myInterval),150)
+}
+
+var left = ()=>{
+  let myInterval = setInterval(leftMove,5)
+  setTimeout(()=>clearInterval(myInterval),150)
+}
+
 var rightMove = ()=>{
   if(xShip<=1850){
     ctx.clearRect(xShip, yShip, finalWidthElements+1, heightElements)
       xShip+=shipSpeed
     ctx.fillStyle="green"
     ctx.fillRect(xShip, yShip, finalWidthElements, heightElements)
-
   }
 }
 
