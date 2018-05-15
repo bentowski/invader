@@ -140,20 +140,15 @@ var mvmtR = ()=>{
 let missil ={
   xWeapon: 0,
   yWeapon: 0,
-  creating: () => {
-    ctx.fillStyle="yellow"
-    ctx.fillRect(weapon[w].xWeapon, weapon[w].yWeapon, weaponWidth, weaponHeight)
-  },
-  move: () => {
+  move: function() {
     let xWeapon=weapon[w].xWeapon
     let yWeapon=weapon[w].yWeapon
-    ctx.clearRect(xWeapon, yWeapon, weaponWidth+1, weaponHeight)
+    ctx.clearRect(weapon[w].xWeapon, weapon[w].yWeapon, weaponWidth+1, weaponHeight)
     weapon[w].yWeapon-=shootSpeed
     ctx.fillStyle="yellow"
-    ctx.fillRect(xWeapon, yWeapon, weaponWidth, weaponHeight)
+    ctx.fillRect(weapon[w].xWeapon, weapon[w].yWeapon, weaponWidth, weaponHeight)
     if(weapon[w].yWeapon>0-weaponHeight){
       requestAnimationFrame(weapon[w].move);
-      clearInterval(hit)
     }
   }
 }
@@ -163,38 +158,7 @@ var shoot=()=>{
   weapon[w]=Object.create(missil)
   weapon[w].xWeapon=xShip
   weapon[w].yWeapon=yShip-heightElements
-  weapon[w].creating()
   weapon[w].move()
-  hit=setInterval(hitBox,1)
-}
-
-                //=================HIT BOX==================
-
-var hitBox = () => {
-  let xLeft=xWave
-  let xRight=xWave+widthElements
-  let yUp=yWave
-  let yDown=yWave+heightElements
-  for(w;w<weapon.length;w++){
-    for(i=0;i<enemiNumber.length;i++){
-      if(enemiNumber[i]){
-        if(xLeft<weapon[w].xWeapon && xRight>weapon[w].xWeapon && yDown>weapon[w].yWeapon && yUp<weapon[w].yWeapon){
-          //stop requestAnimationFrame
-          ctx.clearRect(xLeft, yUp, widthElements, heightElements)
-          enemiNumber[i].active=false
-          console.log("test");
-        }
-      }
-      xLeft+=spaceWaveElements
-      xRight+=spaceWaveElements
-      if(i===10 || i===20 || i===30 || i===40){
-        yUp+=spaceWaveElementsHeight
-        yDown+=spaceWaveElementsHeight
-        xLeft=xWave
-        xRight=xWave+widthElements
-      }
-    }
-  }
 }
 
                 //==================SHIP=====================
