@@ -227,7 +227,7 @@
 
   var rightMove = ()=>{
     if(xShip<=1850){
-      ctx.clearRect(xShip-1, yShip, widthElements+1, heightElements)
+      ctx.clearRect(xShip-5, yShip, widthElements+1, heightElements)
         xShip+=shipSpeed
       ctx.fillStyle="green"
       ctx.fillRect(xShip, yShip, widthElements, heightElements)
