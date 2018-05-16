@@ -166,7 +166,7 @@
   }
 
   let moveShoot=()=>{
-    ctx.clearRect(xWeapon, yWeapon, weaponWidth, weaponHeight)
+    ctx.clearRect(xWeapon, yWeapon, weaponWidth+1, weaponHeight)
     yWeapon-=shootSpeed
     ctx.fillStyle="yellow"
     ctx.fillRect(xWeapon, yWeapon, weaponWidth, weaponHeight)
