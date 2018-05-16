@@ -5,11 +5,3 @@ body{
   flex-direction: column;
   justify-content: center;
 }
-
-.ship{
-  background-color: red;
-}
-
-.vagues{
-  /* background-color: green; */
-}
