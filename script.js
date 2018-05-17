@@ -455,107 +455,107 @@ zLetter=()=>{
   right()
 }
 var phrase=prompt("saisissez un mot")
-var array= //récupérer les lettres et les placer dans le tableau
+var array= phrase.split("",12)
 for(i=0; i<array.length; i++){
   letter=array[i]
-  swicth(letter){
-    case a:
+  switch(letter){
+    case "a":
       aLetter()
       x+=cubeWidth
       break;
-    case b:
+    case "b":
       bLetter()
       x+=cubeWidth
       break;
-    case c:
+    case "c":
       cLetter()
       x+=cubeWidth
       break;
-    case d:
+    case "d":
       dLetter()
       x+=cubeWidth
       break;
-    case e:
+    case "e":
       eLetter()
       x+=cubeWidth
       break;
-    case f:
+    case "f":
       fLetter()
       x+=cubeWidth
       break;
-    case g:
+    case "g":
       gLetter()
       x+=cubeWidth
       break;
-    case h:
+    case "h":
       hLetter()
       x+=cubeWidth
       break;
-    case i:
+    case "i":
       iLetter()
       x+=cubeWidth
       break;
-    case j:
+    case "j":
       jLetter()
       x+=cubeWidth
       break;
-    case k:
+    case "k":
       kLetter()
       x+=cubeWidth
       break;
-    case l:
+    case "l":
       lLetter()
       x+=cubeWidth
       break;
-    case m:
+    case "m":
       mLetter()
       x+=cubeWidth
       break;
-    case n:
+    case "n":
       nLetter()
       x+=cubeWidth
       break;
-    case o:
+    case "o":
       oLetter()
       x+=cubeWidth
       break;
-    case p:
+    case "p":
       pLetter()
       x+=cubeWidth
       break;
-    case q:
+    case "q":
       qLetter()
       x+=cubeWidth
       break;
-    case r:
+    case "r":
       rLetter()
       x+=cubeWidth
       break;
-    case s:
+    case "s":
       sLetter()
       x+=cubeWidth
       break;
-    case t:
+    case "t":
       tLetter()
       x+=cubeWidth
       break;
-    case u:
+    case "u":
       uLetter()
       x+=cubeWidth
       break;
-    case v:
+    case "v":
       vLetter()
       x+=cubeWidth
       break;
-    case w:
+    case "w":
       wLetter()
       x+=cubeWidth
       break;
-    case x:
+    case "x":
       xLetter()
       x+=cubeWidth
       break;
-    case z:
+    case "z":
       zLetter()
       x+=cubeWidth
       break;
