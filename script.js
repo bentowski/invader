@@ -1,208 +1,563 @@
-//==============interaction==============
-function infosClavier(e) {
-    var number = Number(e.keyCode);
-  switch (number){
-    case 32:
-    shoot()
-    break;
-    case 37:
-    gauche()
-    break;
-    case 39:
-    droite()
-    break;
-    case 13:
-    init()
-    break;
-  }
-}
-
- document.addEventListener("keydown", infosClavier)
-
-
-
-
-//===============initialisation===========
-
-l=window.innerWidth
-h=window.innerHeight
-const vague=document.getElementById("vagues")
+const vague = document.getElementById("vagues")
 const ctx = vague.getContext('2d')
-const ship=document.getElementById("ship")
-const shipCtx=ship.getContext("2d")
-var long=0
-  , xVaisseau=l/2-85/2
-  , yVaisseau=10
-  , rang=0
-  , yVague=25
-  , xVague=""
-  , Droite=0
-  , Gauche=0
-  , vitesseVaisseau=30 // vitesse vaisseau
-  , vert=vitesseVaisseau+1
-  , noir=vitesseVaisseau+2
-  , xred=150+85
-  , xblack=150
-  , xf=""
-  , xr=""
-  , vitesseVague=10 //vitesse vague
-  , rouge=vitesseVague+1
-  , Noir=vitesseVague+2
-  , deplacementDroite=true
-  , mvmtv=0
-  , vitesseTir=5
+let x=300
+  , y=200
+  , cubeWidth=20
+  , cubeHeight=20
 
-function init(){
-  while(long < 85){
-        shipCtx.fillStyle="green"
-        shipCtx.fillRect(xVaisseau, yVaisseau, 1, 50)
-        xVaisseau=xVaisseau+1
-    long++
+//Right
+right=()=>{
+  for(i=0; i<4; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth
   }
-
-  while(rang < 5){
-    xVague=150
-    for(i=0; i<10; i++){
-        ctx.fillStyle="red"
-        ctx.fillRect(xVague, yVague, 85, 50)
-        xVague=xVague+170
-    }
-    yVague=yVague+90
-    rang++
-  }
-  yVague=25
-  setInterval(move,500)
 }
 
+rightNone=()=>{
+  for(i=0; i<4; i++){
+    x+=cubeWidth
+  }
+}
 
+right2=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth
+  }
+}
 
-//==============Mvmt vague================
-function move(){
-  console.log(deplacementDroite);
-  if (deplacementDroite){
-    mvmtD()
-  } else {
-    mvmtG()
+right2None=()=>{
+  for(i=0; i<2; i++){
+    x+=cubeWidth
   }
 }
 
 
-
-  function mvmtD(){
-    if(mvmtv===1){
-      xred+=95
-      xblack-=75
-    }
-      xred+=vitesseVague
-      xblack+=vitesseVague
-      rang=0
-      while(rang < 5){
-        xf=xred
-        xr=xblack
-        for(i=0; i<10; i++){
-            ctx.fillStyle="red"
-            ctx.fillRect(xf-10, yVague, rouge, 50)
-            xf=xf+170
-            ctx.fillStyle="black"
-            ctx.fillRect(xr-10, yVague, Noir, 50)
-            xr=xr+170
-        }
-        yVague=yVague+90
-        rang++
-      }
-      yVague=25
-      mvmtv=0
-      if(xf >= vagues.width){
-        deplacementDroite=false
-      }
+left=()=>{
+  for(i=0; i<4; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth
   }
-
- function mvmtG(){
-   if (mvmtv===0){
-     xred-=95
-     xblack+=75
-   }
-     xred-=vitesseVague
-     xblack-=vitesseVague
-     rang=0
-     while(rang < 5){
-       xf=xred
-       xr=xblack
-       for(i=0; i<10; i++){
-         ctx.fillStyle="red"
-         ctx.fillRect(xf+11, yVague, rouge, 50)
-         xf=xf+170
-         ctx.fillStyle="black"
-         ctx.fillRect(xr+10, yVague, Noir, 50)
-         xr=xr+170
-       }
-       yVague=yVague+90
-       rang++
-     }
-     yVague=25
-     mvmtv=1
-     if(xr <= 1900){
-       deplacementDroite=true
-     }
- }
-
-//===============ship=====================
-
-function droite(){
-  if(xVaisseau < l-100){
-        if (Gauche===1){
-          shipCtx.fillStyle="green"
-          shipCtx.fillRect(xVaisseau-9, yVaisseau, vert, 50)
-          var left=xVaisseau-89
-          shipCtx.fillStyle="black"
-          shipCtx.fillRect(left,yVaisseau,noir,50)
-        }
-        Gauche=0
-        shipCtx.fillStyle="green"
-        shipCtx.fillRect(xVaisseau, yVaisseau, vert, 50)
-        var left=xVaisseau-86
-        shipCtx.fillStyle="black"
-        shipCtx.fillRect(left,yVaisseau,noir,50)
-        xVaisseau+=vitesseVaisseau
-        Droite=1
-    }
 }
 
-function gauche(){
-  if (xVaisseau > (100+85)){
-        if (Droite===1){
-          shipCtx.fillStyle="green"
-          shipCtx.fillRect(xVaisseau-86, yVaisseau, vert, 50)
-          var right=xVaisseau-9
-          shipCtx.fillStyle="black"
-          shipCtx.fillRect(right,yVaisseau,noir,50)
-        }
-        Droite=0
-        shipCtx.fillStyle="green"
-        shipCtx.fillRect(xVaisseau-95, yVaisseau, vert, 50)
-        var right=xVaisseau-10
-        shipCtx.fillStyle="black"
-        shipCtx.fillRect(right,yVaisseau,noir,50)
-        xVaisseau-=vitesseVaisseau
-        Gauche=1
-    }
+leftNone=()=>{
+  for(i=0; i<4; i++){
+    x-=cubeWidth
+  }
 }
 
-//==============tir============
-// var xTir
-// var yTir
-//
-// function shoot() {
-//   xTir=xVaisseau
-//   yTir=yVaisseau
-//   console.log(yTir);
-//   shipCtx.fillStyle="yellow"
-//   shipCtx.fillRect(xTir-84/2-5, yTir, 10, 50)
-//   console.log(yTir);
-// }
-//
-// function deplacementTir() {
-//     shipCtx.fillStyle="yellow"
-//     shipCtx.fillRect(xTir-84/2-5, yTir, 10, 50)
-//     console.log(yTir);
-// }
+left2=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth
+  }
+}
+
+
+left2None=()=>{
+  for(i=0; i<3; i++){
+    x-=cubeWidth
+  }
+}
+
+up3=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    y-=cubeHeight
+  }
+}
+
+up3None=()=>{
+  for(i=0; i<3; i++){
+    y-=cubeHeight
+  }
+}
+
+down3=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    y+=cubeHeight
+  }
+}
+
+down3None=()=>{
+  for(i=0; i<3; i++){
+    y+=cubeHeight
+  }
+}
+
+height=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    y-=cubeHeight
+  }
+  x+=cubeWidth
+  y+=cubeHeight
+}
+
+heightNone=()=>{
+  for(i=0; i<6; i++){
+    y-=cubeHeight
+  }
+}
+
+floor=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    y+=cubeHeight
+  }
+}
+
+floorNone=()=>{
+  for(i=0; i<6; i++){
+    y+=cubeHeight
+  }
+}
+
+upLeft=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth/2
+    y-=cubeHeight
+  }
+}
+
+downLeft=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+halfUpLeft=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth/2
+    y-=cubeHeight
+  }
+}
+
+halfUpLeftNone=()=>{
+  for(i=0; i<3; i++){
+    x-=cubeWidth/2
+    y-=cubeHeight
+  }
+}
+
+halfDownLeft=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x-=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+halfDownLeftNone=()=>{
+  for(i=0; i<3; i++){
+    x-=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+upRight=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth/2
+    y-=cubeHeight
+  }
+  y+=cubeHeight
+}
+
+downRight=()=>{
+  for(i=0; i<6; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+halfUpRight=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth/2
+    y-=cubeHeight
+  }
+}
+
+halfUpRightNone=()=>{
+  for(i=0; i<3; i++){
+    x+=cubeWidth/2
+    y-=cubeHeight
+  }
+}
+
+halfDownRight=()=>{
+  for(i=0; i<3; i++){
+    ctx.fillStyle="yellow"
+    ctx.fillRect(x,y,cubeWidth, cubeHeight)
+    x+=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+halfDownRightNone=()=>{
+  for(i=0; i<3; i++){
+    x+=cubeWidth/2
+    y+=cubeHeight
+  }
+}
+
+//================    A
+aLetter=()=>{
+  upRight()
+  downRight()
+  halfUpLeftNone()
+  left()
+}
+
+//================    B
+bLetter=()=>{
+  height()
+  right()
+  down3()
+  left()
+  rightNone()
+  down3()
+  left()
+}
+
+//================    C
+cLetter=()=>{
+  rightNone()
+  left()
+  height()
+  right()
+}
+
+//================    D
+
+//================    E
+eLetter = ()=>{
+  console.log("test");
+  right()
+  leftNone()
+  up3()
+  right2()
+  left2None()
+  up3()
+  right()
+}
+
+//================    F
+fLetter=()=>{
+  heightNone()
+  rightNone()
+  left()
+  floor()
+  up3None()
+  right2()
+}
+
+//================    G
+gLetter=()=>{
+  heightNone()
+  rightNone()
+  left()
+  floor()
+  right()
+  up3()
+  left2()
+}
+
+
+//================    H
+hLetter=()=>{
+  height()
+  down3None()
+  right2()
+  up3None()
+  floor()
+}
+
+//================    I
+iLetter=()=>{
+  right()
+  left2None()
+  x+=cubeWidth/2
+  height()
+  left2None()
+  x+=cubeWidth/2
+  right()
+}
+
+//================    J
+jLetter=()=>{
+  right()
+  height()
+  left2()
+}
+
+//================    K
+kLetter=()=>{
+  height()
+  down3None()
+  halfUpRight()
+  halfDownLeftNone()
+  halfDownRight()
+}
+
+//================    L
+lLetter=()=>{
+  right()
+  leftNone()
+  height()
+}
+
+//================    M
+mLetter=()=>{
+  height()
+  halfDownRight()
+  y-=cubeHeight
+  halfUpLeft()
+  y+=cubeHeight
+  x+=cubeWidth/2
+  floor()
+}
+
+//================    N
+nLetter=()=>{
+  height()
+  downRight()
+  y-=cubeHeight
+  height()
+}
+
+//================    O
+oLetter=()=>{
+  height()
+  right()
+  x-=cubeWidth
+  floor()
+  y-=cubeHeight
+  left()
+}
+
+//================    P
+pLetter=()=>{
+  height()
+  x-=cubeWidth
+  right()
+  down3()
+  left()
+}
+
+//================    Q
+
+//================    R
+rLetter=()=>{
+  height()
+  x-=cubeWidth
+  right()
+  down3()
+  left()
+  x+=cubeWidth*2
+  halfDownRight()
+}
+
+//================    S
+sLetter=()=>{
+  right()
+  x-=cubeWidth
+  up3()
+  left()
+  x+=cubeWidth
+  up3()
+  right()
+}
+
+//================    T
+tLetter=()=>{
+  heightNone()
+  right()
+  left2None()
+  x+=cubeWidth/2
+  floor()
+}
+
+//================    U
+uLetter=()=>{
+  heightNone()
+  floor()
+  y-=cubeHeight
+  right()
+  height()
+}
+
+//================    V
+vLetter=()=>{
+  heightNone()
+  downRight()
+  y-=cubeHeight
+  upRight()
+}
+
+//================    W
+wLetter=()=>{
+  heightNone()
+  downRight()
+  y-=cubeHeight
+  halfUpRight()
+  halfDownRight()
+  upRight()
+}
+
+//================    X
+xLetter=()=>{
+  upRight()
+  left2None()
+  downRight()
+}
+
+//================    Y
+yLetter=()=>{
+  right2None()
+  up3()
+  x-=cubeWidth/2
+  halfUpLeft()
+  halfDownRightNone()
+  x+=cubeWidth
+  halfUpRight()
+}
+
+//================    Z
+zLetter=()=>{
+  heightNone()
+  right()
+  x-=cubeWidth
+  downLeft()
+  y-=cubeHeight
+  right()
+}
+var phrase=prompt("saisissez un mot")
+var array= //récupérer les lettres et les placer dans le tableau
+for(i=0; i<array.length; i++){
+  letter=array[i]
+  swicth(letter){
+    case a:
+      aLetter()
+      x+=cubeWidth
+      break;
+    case b:
+      bLetter()
+      x+=cubeWidth
+      break;
+    case c:
+      cLetter()
+      x+=cubeWidth
+      break;
+    case d:
+      dLetter()
+      x+=cubeWidth
+      break;
+    case e:
+      eLetter()
+      x+=cubeWidth
+      break;
+    case f:
+      fLetter()
+      x+=cubeWidth
+      break;
+    case g:
+      gLetter()
+      x+=cubeWidth
+      break;
+    case h:
+      hLetter()
+      x+=cubeWidth
+      break;
+    case i:
+      iLetter()
+      x+=cubeWidth
+      break;
+    case j:
+      jLetter()
+      x+=cubeWidth
+      break;
+    case k:
+      kLetter()
+      x+=cubeWidth
+      break;
+    case l:
+      lLetter()
+      x+=cubeWidth
+      break;
+    case m:
+      mLetter()
+      x+=cubeWidth
+      break;
+    case n:
+      nLetter()
+      x+=cubeWidth
+      break;
+    case o:
+      oLetter()
+      x+=cubeWidth
+      break;
+    case p:
+      pLetter()
+      x+=cubeWidth
+      break;
+    case q:
+      qLetter()
+      x+=cubeWidth
+      break;
+    case r:
+      rLetter()
+      x+=cubeWidth
+      break;
+    case s:
+      sLetter()
+      x+=cubeWidth
+      break;
+    case t:
+      tLetter()
+      x+=cubeWidth
+      break;
+    case u:
+      uLetter()
+      x+=cubeWidth
+      break;
+    case v:
+      vLetter()
+      x+=cubeWidth
+      break;
+    case w:
+      wLetter()
+      x+=cubeWidth
+      break;
+    case x:
+      xLetter()
+      x+=cubeWidth
+      break;
+    case z:
+      zLetter()
+      x+=cubeWidth
+      break;
+  }
+}
