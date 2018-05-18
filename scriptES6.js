@@ -41,7 +41,7 @@
       const vague = document.getElementById("vagues")
       const ctx = vague.getContext('2d')
       const img=new Image()
-      const phillipe=new Image()
+      const ship=new Image()
       const div=new Image()
     //=====generals variables=====
       let widthElements=85
@@ -92,14 +92,14 @@
     var init = () => {
       let row=rowWave
       let y=yWave
-      phillipe.src='phillipe.png'
-      ctx.drawImage(phillipe,xShip, yShip, widthElements, shipHeight)
+      ship.src='ship.png'
+      ctx.drawImage(ship,xShip, yShip, widthElements, shipHeight)
       left()
       while (row < finalRowWave) {
         let x=xWave
         for (i=0; i<waveElements; i++){
 
-          img.src='presta.png'
+          img.src='chicken.png'
           ctx.drawImage(img, x, y, widthElements, heightElements)
           enemiNumber[number]={xWeapon:x, yWeapon:y, id:number, active:true, life:0}
           enemiNumber[number].life=level
@@ -128,7 +128,7 @@
         }
         if(enemiNumber[i].active){
           ctx.clearRect(x-waveSpeed,y, widthElements, heightElements)
-          img.src='presta.png'
+          img.src='chicken.png'
           ctx.drawImage(img, x, y, widthElements, heightElements)
         }
         x+=spaceWaveElements
@@ -157,7 +157,7 @@
         }
         if(enemiNumber[i].active){
           ctx.clearRect(x+waveSpeed,y, widthElements, heightElements)
-          img.src='presta.png'
+          img.src='chicken.png'
           ctx.drawImage(img, x, y, widthElements, heightElements)
         }
         x+=spaceWaveElements
@@ -181,7 +181,7 @@
       shootAgain=false
       xWeapon=xShip+widthElements/2
       yWeapon=yShip-weaponHeight
-      div.src='div.png'
+      div.src='laser.png'
       ctx.drawImage(div, xWeapon, yWeapon, weaponWidth, weaponHeight)
       moving=setInterval(moveShoot,10)
       setInterval(hitBox,20)
@@ -190,7 +190,7 @@
     let moveShoot=()=>{
       ctx.clearRect(xWeapon, yWeapon, weaponWidth+1, weaponHeight)
       yWeapon-=shootSpeed
-      div.src='div.png'
+      div.src='laser.png'
       ctx.drawImage(div, xWeapon, yWeapon, weaponWidth, weaponHeight)
       if(yWeapon<0-weaponHeight){
         clearInterval(moving)
@@ -207,16 +207,18 @@
       let yDown=yWave+heightElements
       for(i=0;i<enemiNumber.length;i++){
         if(enemiNumber[i].active){
-          if(xLeft<xWeapon && xRight>xWeapon && yDown>yWeapon && yUp<yWeapon){
-            clearInterval(moving)
-            ctx.clearRect(xWeapon, yWeapon, weaponWidth+1, weaponHeight)
-            xWeapon=0
-            yWeapon=0
-            enemiNumber[i].life-=1
-            shootAgain=true
-            if(enemiNumber[i].life===0){
-              ctx.clearRect(xLeft, yUp, widthElements, heightElements)
-              enemiNumber[i].active=false
+          if(xLeft-5<xWeapon && xRight>xWeapon){
+            if(yDown>yWeapon && yUp<yWeapon){
+              clearInterval(moving)
+              ctx.clearRect(xWeapon, yWeapon, weaponWidth+1, weaponHeight)
+              xWeapon=0
+              yWeapon=0
+              enemiNumber[i].life-=1
+              shootAgain=true
+              if(enemiNumber[i].life===0){
+                ctx.clearRect(xLeft, yUp, widthElements, heightElements)
+                enemiNumber[i].active=false
+              }
             }
           }
         }
@@ -270,8 +272,8 @@
       if(xShip<=1850){
         ctx.clearRect(xShip-5, yShip, widthElements+1, shipHeight)
           xShip+=shipSpeed
-          phillipe.src='phillipe.png'
-          ctx.drawImage(phillipe,xShip, yShip, widthElements, shipHeight)
+          ship.src='ship.png'
+          ctx.drawImage(ship,xShip, yShip, widthElements, shipHeight)
       }
     }
 
@@ -279,8 +281,8 @@
       if(xShip>=100){
         ctx.clearRect(xShip, yShip, widthElements+1, shipHeight)
           xShip-=shipSpeed
-          phillipe.src='phillipe.png'
-          ctx.drawImage(phillipe,xShip, yShip, widthElements, shipHeight)
+          ship.src='ship.png'
+          ctx.drawImage(ship,xShip, yShip, widthElements, shipHeight)
       }
     }
 
