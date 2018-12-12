@@ -30,7 +30,7 @@
       }
     }
 
-    document.addEventListener("keydown", infosClavier);
+    document.addEventListener("keypress", infosClavier);
     document.addEventListener("keyup", infosClavier2) //only for shooting
 
   //===============VARIABLES=============
@@ -90,23 +90,28 @@
   //=============INITIALIZING===========
 
     var init = () => {
-      let row=rowWave
-      let y=yWave
+      let row=rowWave // attribute a number for each enemies
+      let y=yWave //hight for the top's row
+
+      // drawing Ship
       ship.src='ship.png'
       ctx.drawImage(ship,xShip, yShip, widthElements, shipHeight)
-      left()
-      while (row < finalRowWave) {
-        let x=xWave
-        for (i=0; i<waveElements; i++){
+      left() //problem, if the ship appears only at the first move, so call "left()" for make appears the ship directly
 
+      //loop for waves
+      while (row < finalRowWave) {
+        let x=xWave // position "x" for the first line
+        for (i=0; i<waveElements; i++){
+          //drawing enemies
           img.src='chicken.png'
           ctx.drawImage(img, x, y, widthElements, heightElements)
+          //situation of each enemy : actif or not
           enemiNumber[number]={xWeapon:x, yWeapon:y, id:number, active:true, life:0}
-          enemiNumber[number].life=level
-          x+=spaceWaveElements
+          enemiNumber[number].life=level //level is the number of shoot for kill enemies, upgraded for each wave
+          x+=spaceWaveElements //position "x" for the next line
           number++
         }
-        y+=spaceWaveElementsHeight
+        y+=spaceWaveElementsHeight //hight for the next row
         row++
       }
      waveMoveInterval= setInterval(move,10)
@@ -302,6 +307,9 @@
   }
 
   //=================MENU===================
+
+  //============All posibilities for create letters=========
+
   let write=()=>{
     const vague = document.getElementById("vagues")
     const ctx = vague.getContext('2d')
@@ -527,6 +535,8 @@
         y+=cubeHeight
       }
     }
+
+    //=========Instructions for each letter=======
 
     //================    A
     aLetter=()=>{
@@ -768,7 +778,10 @@
       y-=cubeHeight
       rightLetter()
     }
-    var phrase="press enter to start"
+
+    //====== Instructions for call goods letter corresponding with the text to print=====
+
+    var phrase="press enter to start" //select the text to print
     var array= phrase.split("")
     let number=0
     for(p=0; p<array.length; p++){
