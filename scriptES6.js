@@ -31,6 +31,7 @@
     }
 
     document.addEventListener("keypress", infosClavier);
+    console.log(e);
     document.addEventListener("keyup", infosClavier2) //only for shooting
 
   //===============VARIABLES=============
