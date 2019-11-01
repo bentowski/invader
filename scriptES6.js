@@ -10,10 +10,10 @@
            firstInit=false
          }
           break;
-        case 38:
+        case 37:
           left()
           break;
-        case 40:
+        case 39:
           right()
           break;
       }
@@ -30,8 +30,7 @@
       }
     }
 
-    document.addEventListener("keypress", infosClavier);
-    console.log(e);
+    document.addEventListener("keyup", infosClavier);
     document.addEventListener("keyup", infosClavier2) //only for shooting
 
   //===============VARIABLES=============
